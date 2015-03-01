@@ -1,0 +1,86 @@
+[plugin-panel="true"] {
+    position: absolute !important;
+    background-color: #FFF;
+    max-width: 90%;
+    min-width: 150px;
+    min-height: 75px;
+    box-shadow: 5px 5px 6px rgba(50, 50, 50, 0.45);
+    border: solid 1px #000;
+}
+
+[plugin-panel="true"],
+[plugin-panel="true"] >div {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+[plugin-panel="true"] >div[is="header"] {
+    vertical-align: middle;
+    background-color: rgb(0, 100, 192);
+    color: #FFF;
+    padding: 0.3em 2em 0.3em 0.7em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    line-height: 1em;
+    width: 100%;
+    min-height: 24px;
+}
+
+[plugin-panel="true"] >div[is="content"] {
+    padding: 1.6em 1.2em;
+    line-height: 115%;
+}
+
+[plugin-panel="true"] >div[is="footer"] {
+    border-top: 1px solid #EAE6DB;
+    overflow: hidden;
+    vertical-align: middle;
+    text-align: right;
+    line-height: 1em;
+    padding: 0.55em 0.7em;
+    width: 100%;
+    min-height: 24px;
+}
+
+[plugin-panel="true"] >div[is="footer"] i-button + i-button,
+[plugin-panel="true"] >div[is="footer"] button + button {
+    margin-left: 0.5em;
+}
+
+[plugin-panel="true"].itsa-full-draggable {
+    cursor: default;
+}
+
+[plugin-panel="true"]:not(.itsa-full-draggable) >div[is="content"],
+[plugin-panel="true"]:not(.itsa-full-draggable) >div[is="footer"] {
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+[plugin-panel="true"] >button {
+    padding: 0.5em;
+    position: absolute;
+    right: 0.2em;
+    top: 0.2em;
+    z-index: 1;
+}
+
+body >div[is="system-node"].itsa-modal-layer {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    -webkit-box-sizing: border-box !important;
+    -moz-box-sizing: border-box !important;
+    box-sizing: border-box !important;
+    z-index: 1000 !important;
+    background-color: #000 !important;
+    opacity: 0.2 !important;
+}
