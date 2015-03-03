@@ -42,6 +42,7 @@ module.exports = function (window) {
     require('window-ext')(window);
     require('node-plugin')(window);
     require('focusmanager')(window);
+    require('scrollable')(window);
 
     Event = require('event-mobile')(window);
     DD = require('drag')(window);
@@ -155,7 +156,6 @@ module.exports = function (window) {
         var instance = this,
             model = instance.model,
             host = instance.host,
-            footer = model.footer,
             allDivs, serverHeader, serverContent, serverFooter;
 
         instance._previousVisible = model.visible;
@@ -170,12 +170,7 @@ module.exports = function (window) {
             serverContent && instance.defineWhenUndefined('content', serverContent);
             if (serverFooter) {
                 instance.defineWhenUndefined('footer', serverFooter);
-                // need to redefine `footer`
-                footer = model.footer;
             }
-        }
-        if (!footer || !footer.contains('button')) {
-            model.headerCloseBtn = true;
         }
         instance._resizeHandler = Event.after('UI:resize', function() {
             var isMobileWidth = (window.getWidth()<=480);
@@ -289,14 +284,18 @@ module.exports = function (window) {
                 footerNode = divs[2],
                 isMobileWidth = (window.getWidth()<=480),
                 buttonCloseNode = host.getElement('>button'),
+                showHeaderCloseBtn = model.headerCloseBtn,
                 zIndex, isOnTop;
             (header==='undefined') && (header=undefined);
             (footer==='undefined') && (footer=undefined);
-            if (model.headerCloseBtn && !header) {
+            if (!footer || !footer.contains('button')) {
+                showHeaderCloseBtn = true;
+            }
+            if (showHeaderCloseBtn && !header) {
                 header = '';
             }
             (header!==undefined) && headerNode.setHTML(header || '');
-            buttonCloseNode.toggleClass('itsa-no-display', !model.headerCloseBtn);
+            buttonCloseNode.toggleClass('itsa-no-display', !showHeaderCloseBtn);
 
             headerNode.toggleClass('itsa-hidden', (header===undefined));
             contentNode.setHTML(content || '');
@@ -327,7 +326,7 @@ module.exports = function (window) {
             model.maxHeight && host.setInlineStyle('maxHeight', model.maxHeight);
             instance.setPanelWidth(isMobileWidth);
 
-            if (model.center && (!instance._prevCenter || !model.draggable)) {
+            if (model.center && (!model.draggable || (!instance._previousVisible && model.visible))) {
                 instance.centerPanel();
             }
             else if (!model.center && !host.hasClass('dd-dragging')) {
@@ -336,8 +335,6 @@ module.exports = function (window) {
                     {property: 'top', value: model.top+'px'}
                 ]);
             }
-            // prevent re-centering: that would be unhandy when the panel is draggable:
-            instance._prevCenter = model.center;
             // we can plug/unplug multiple times --> node-plugin won't do anything when there are no changes
             host[((model.draggable && !isMobileWidth) ? '' : 'un')+'plug']('dd');
             host[(model.focusmanaged ? '' : 'un')+'plug']('fm');
@@ -355,7 +352,7 @@ module.exports = function (window) {
                 Event.emit(host, 'panel:'+ (model.visible ? 'shown' : 'hidden'), {plugin: instance, model: model});
                 instance._previousVisible = model.visible;
             }
-            if (isOnTop && model.modal && !host.hasClass('focussed')) {
+            if (isOnTop && model.modal) {
                 host.focus();
             }
         },
