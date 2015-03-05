@@ -158,7 +158,6 @@ module.exports = function (window) {
             host = instance.host,
             allDivs, serverHeader, serverContent, serverFooter;
 
-        instance._previousVisible = model.visible;
         if (host.getAttr('panel-rendered')==='true') {
             // serverside rendered --> we might need to catch header, content and footer
             // for they aren't set in the attributes
@@ -326,7 +325,7 @@ module.exports = function (window) {
             model.maxHeight && host.setInlineStyle('maxHeight', model.maxHeight);
             instance.setPanelWidth(isMobileWidth);
 
-            if (model.center && (!model.draggable || (!instance._previousVisible && model.visible))) {
+            if (model.center && (!model.draggable || ((instance._previousVisible!==true) && model.visible))) {
                 instance.centerPanel();
             }
             else if (!model.center && !host.hasClass('dd-dragging')) {
