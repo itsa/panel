@@ -56,7 +56,7 @@ module.exports = function (window) {
      * @since 0.0.1
      */
     insertModalLayer = function() {
-       DOCUMENT.body.addSystemElement('<div class="itsa-modal-layer itsa-no-display"></div>', null, true);
+       DOCUMENT.body.addSystemElement('<div class="itsa-modal-layer itsa-nodisplay"></div>', null, true);
     };
 
     insertModalLayer();
@@ -122,7 +122,7 @@ module.exports = function (window) {
         },
         showModalLayer: function(show) {
             var modalLayer = DOCUMENT.getElement('body >div[is="system-node"].itsa-modal-layer', true);
-            modalLayer.toggleClass('itsa-no-display', !show);
+            modalLayer.toggleClass('itsa-nodisplay', !show);
         }
     };
 
@@ -294,7 +294,7 @@ module.exports = function (window) {
                 header = '';
             }
             (header!==undefined) && headerNode.setHTML(header || '');
-            buttonCloseNode.toggleClass('itsa-no-display', !showHeaderCloseBtn);
+            buttonCloseNode.toggleClass('itsa-nodisplay', !showHeaderCloseBtn);
 
             headerNode.toggleClass('itsa-hidden', (header===undefined));
             contentNode.setHTML(content || '');
