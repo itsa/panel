@@ -39,6 +39,7 @@ module.exports = function (window) {
         return Panel; // Panel was already created
     }
 
+    require('vdom')(window);
     require('window-ext')(window);
     require('node-plugin')(window);
     require('focusmanager')(window);
