@@ -38,6 +38,7 @@
         "window-ext": "itsa/window-ext",
         "node-plugin": "itsa/node-plugin",
         "scrollable": "itsa/scrollable",
+        "useragent": "itsa/useragent",
         "focusmanager": "itsa/focusmanager",
         "vdom": "itsa/vdom"
     },
