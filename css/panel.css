@@ -25,7 +25,8 @@
     text-overflow: ellipsis;
     vertical-align: middle;
     line-height: 1.75em;
-    width: 100%;
+    /* don't set the width to 100% --> IE messes things up */
+    /*width: 100%;*/
     min-height: 1.75em;
 }
 
@@ -41,7 +42,8 @@
     text-align: right;
     line-height: 1em;
     padding: 0.5em 0.7em;
-    width: 100%;
+    /* don't set the width to 100% --> IE messes things up */
+    /*width: 100%;*/
     min-height: 24px;
 }
 
